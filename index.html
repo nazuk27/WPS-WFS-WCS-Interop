@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://localhost:8080/geoserver/openlayers3/ol.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="./index.css" type="text/css">
+ <script src="http://localhost:8080/geoserver/openlayers3/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="D:\Downloads\Documents\GATE\IIT Bombay\2020\CSRE\GNR 629 Interoperability\Project Interop\ol.css">
+ <!--<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script> -->
+
+</head>
+<body>
+  <script type="http://localhost:8080/geoserver/openlayers3/ol.js"></script>
+  <script type="C:\Users\Aditi\Desktop\pro\open.js"></script>
+<div class="header">
+
+<h1>Project 1 - GNR 629</h1>
+</div>
+
+<div>
+  <div class="column">
+  
+
+    <div class = "tab">
+      <div class='tab_inside'>
+   <button class="tablinks" onclick="openCity(event, 'WMS')">WMS</button>
+   <button class="tablinks" onclick="openCity(event, 'WCS')">WCS</button>
+   <button class="tablinks" onclick="openCity(event, 'WFS')">WFS</button>
+ </div>
+ </div>
+ <div id="WMS" class="tabcontent1">
+       <form id="london_form">  
+    <fieldset>  
+         <legend>WMS Service</legend>  
+         <div class="row">
+           <div class="col-md-12">
+            <label style="width: 100%;">Enter URL for GetCapability :
+              <input type="text"  name="name" id="getURL"  class="form-control">
+              &nbsp;<input type="button" class="btn btn-primary btn-lg" value="Submit Request" onclick="loadDoc('WMS');">
+             </label> 
+           </div>
+           
+         </div>
+         
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WmsRequest" class = "label">
+               Request:
+               <select id="WmsRequest" class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+           </div>
+         </div>                  
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WmsLayer" class = "label">
+               Layers:
+               <select id="WmsLayer" class = "label1 form-control" onfocus="removecolor('WMS')"
+                onblur="makeRequestForCoordinateSystems('WMS')"  >
+                 <option value="0">
+                   None
+                 </option>
+ 
+               </select>
+             </label>
+           </div>
+         </div>          
+ 
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WmsCrs" class = "label">
+               Coordinate Reference System:
+               <select id="WmsCrs"  class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+             
+           </div>
+         </div>   
+       
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="min_X" class = "label">
+               min_X: 
+               <input type="text" id="wms_min_X" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_X" class = "label">
+               max_X:
+               <input type="text" id="wms_max_X" size="4" class="form-control">
+             </label>
+           </div>
+ 
+         </div>
+ 
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="min_Y" class = "label">
+               min_Y: 
+               <input type="text" id="wms_min_Y" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_Y" class = "label">
+               max_Y:
+               <input type="text" id="wms_max_Y" size="4" class="form-control">
+             </label>
+           </div>
+         </div>
+ 
+         <div class="row">
+           <div class="col-md-4">
+             <label id="width_label" for="width" class = "label">
+               Width: 
+               <input type="text" id="wms_width" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="height_label" for="height" class = "label">
+               Height:
+               <input type="text" id="wms_height" size="4" class="form-control">
+             </label>
+           </div>
+         </div>
+ 
+         
+         <div class="row">
+           <label style="width:100%;">Response :
+            <textarea id = "wms_responseTextArea1" class="form-control">
+            </textarea>
+           </label>
+           <input type="submit" value="Submit" onclick="onclickmap(e)" > 
+         </div>
+         <div id="nodelist">
+			<em>Click on the map to get feature info</em>
+		 </div>
+      </fieldset>  
+   </form>
+ 
+ </div>
+ 
+ <!-- <div class= "row" id ="map1" >
+ </div> -->
+ 
+ 
+ 
+ 
+ <div id="WCS" class="tabcontent1">
+ 
+  <form>  
+    <fieldset>  
+         <legend>WCS Service</legend>  
+         <div class="row">
+           <div class="col-md-12">
+            <label style="width: 100%;">Enter URL for GetCapability :
+              <input type="text"  name="name" id="getURL"  class="form-control">
+              &nbsp;<input type="button" class="btn btn-primary btn-lg" value="Submit Request" onclick="loadDoc('WCS');">
+             </label> 
+           </div>
+           
+         </div>
+         
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WcsRequest" class = "label">
+               Request:
+               <select id="WcsRequest" class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+           </div>
+         </div>                  
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WcsLayer" class = "label">
+               Layers:
+               <select id="WcsLayer" class = "label1 form-control" onfocus="removecolor('WCS')"
+                onblur="makeRequestForCoordinateSystems('WCS')" >
+                 <option value="0">
+                   None
+                 </option>
+ 
+               </select>
+             </label>
+           </div>
+         </div>          
+ 
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WcsCrs" class = "label">
+               Coordinate Reference System:
+               <select id="WcsCrs"  class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+             
+           </div>
+         </div>   
+       
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="min_X" class = "label">
+               min_X: 
+               <input type="text" id="wcs_min_X" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_X" class = "label">
+               max_X:
+               <input type="text" id="wcs_max_X" size="4" class="form-control">
+             </label>
+           </div>
+ 
+         </div>
+ 
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="wcs_min_Y" class = "label">
+               min_Y: 
+               <input type="text" id="wcs_min_Y" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_Y" class = "label">
+               max_Y:
+               <input type="text" id="wcs_max_Y" size="4" class="form-control">
+             </label>
+           </div>
+         </div>
+ 
+         <div class="row">
+           <div class="col-md-4">
+             <label id="width_label" for="width" class = "label">
+               Width: 
+               <input type="text" id="wcs_width" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="height_label" for="height" class = "label">
+               Height:
+               <input type="text" id="wcs_height" size="4" class="form-control">
+             </label>
+           </div>
+         </div>
+ 
+         
+         <div class="row">
+           <label style="width:100%;">Response :
+            <textarea id = "wcs_responseTextArea1" class="form-control">
+            </textarea>
+           </label>
+           <input type="submit" value="Submit" onclick="onclickmap()" > 
+         </div>
+          
+      </fieldset>  
+   </form>
+ </div>
+ 
+ <div id="WFS" class="tabcontent1">
+  
+  <form>  
+    <fieldset>  
+         <legend>WFS Service</legend>  
+         <div class="row">
+           <div class="col-md-12">
+            <label style="width: 100%;">Enter URL for GetCapability :
+              <input type="text"  name="name" id="getURL"  class="form-control">
+              &nbsp;<input type="button" class="btn btn-primary btn-lg" value="Submit Request" onclick="loadDoc('WFS');">
+             </label> 
+           </div>
+           
+         </div>
+         
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WfsRequest" class = "label">
+               Request:
+               <select id="WfsRequest" class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+           </div>
+         </div>                  
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WfsLayer" class = "label">
+               Layers:
+               <select id="WfsLayer" class = "label1 form-control" onfocus="removecolor('WFS')"
+                onblur="wfs_crs()"  >
+                 <option value="0">
+                   None
+                 </option>
+ 
+               </select>
+             </label>
+           </div>
+         </div>          
+ 
+         <div class="row">
+           <div class="col-md-6">
+             <label for="WfsCrs" class = "label">
+               Coordinate Reference System:
+               <select id="WfsCrs"  class = "label1 form-control">
+                 <option value="0">
+                   None
+                 </option>
+               </select>
+             </label>
+             
+           </div>
+         </div>   
+       
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="min_X" class = "label">
+               min_X: 
+               <input type="text" id="wfs_min_X" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_X" class = "label">
+               max_X:
+               <input type="text" id="wfs_max_X" size="4" class="form-control">
+             </label>
+           </div>
+ 
+         </div>
+ 
+         <div class="row">
+           <div class="col-md-4">
+             <label id="min_X_label" for="min_Y" class = "label">
+               min_Y: 
+               <input type="text" id="wfs_min_Y" size="4" class="form-control">
+             </label>
+           </div>
+           <div class="col-md-2"></div>
+           <div class="col-md-4">
+             <label id="min_X_label" for="max_Y" class = "label">
+               max_Y:
+               <input type="text" id="wfs_max_Y" size="4" class="form-control">
+             </label>
+           </div>
+         </div>
+         
+         <div class="row">
+           <label style="width:100%;">Response :
+            <textarea id = "wfs_responseTextArea1" class="form-control">
+            </textarea>
+           </label>
+           <input type="submit" value="Submit" onclick="onclickmap()" > 
+         </div>
+          
+      </fieldset>  
+   </form>
+ </div>
+ </div>
+   
+   <div class="column" id="map" style="background-color: lightgray;">
+     </div>
+</div>
+
+   <script type="text/javascript">
+   
+
+      var wms_source = new ol.source.TileWMS({
+ if(cityName == 'WMS')
+ url: "http://localhost:8080/geoserver/wms"
+ if(cityName == 'WCS')
+ url: "http://localhost:8080/geoserver/wcs"
+ if(cityName == 'WFS')
+ url: "http://localhost:8080/geoserver/wfs"
+ ,
+ params: {
+          'LAYERS': ''
+        },
+extent: [-117.861328,32.472695,-76.376953,47.398349],
+ratio: 1,
+serverType: 'geoserver'
+          });
+var wms_layer = new ol.layer.Tile({
+   source:  wms_source,
+     });
+
+var base_map = new ol.layer.Tile({
+  source: new ol.source.OSM(),
+  visible: true,
+  title: 'OSMStandard'
+});
+
+    var layers = [
+    base_map,
+    wms_layer
+    ];
+
+    var vw=new ol.View({
+      center: [0, 0],
+      zoom: 1
+      });
+
+     map= new ol.Map({
+     target: 'map',
+     layers: layers,
+     view: vw
+     });
+     
+
+    </script>
+
+    <script>
+       
+
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent1");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  $('#getURL').val('');
+  if(cityName === 'WMS'){
+    $('#WMS #getURL').val("http://localhost:8080/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+  }else if(cityName === 'WCS'){
+    $('#WCS #getURL').val("http://localhost:8080/geoserver/ows?service=wcs&version=1.1.1&request=GetCapabilities");
+  }else{
+    $('#WFS #getURL').val("http://localhost:8080/geoserver/ows?service=wfs&version=2.0.0&request=GetCapabilities");
+  }
+}
+</script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./jquery/jquery.min.js"></script>
+<script src='./index.js' type='text/javascript'>
+</script>
+
+
+</body>
+</html>
